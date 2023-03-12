@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -13,6 +13,8 @@ function FormPage() {
     explanationText: "",
     videoGallery: [],
   });
+
+  useEffect(() => {}, []);
 
   const [clientUrl, setClientUrl] = useState("");
 
@@ -147,7 +149,7 @@ function FormPage() {
       {clientUrl && (
         <p className="mt-10 bg-blue-600 p-5 w-fit mx-auto rounded-2xl text-white">
           Custom URL for this client:{" "}
-          <a href={clientUrl} target="_blank" rel="noopener noreferrer">
+          <a href={clientUrl} target="_blank" rel="noopene`r noreferrer">
             {clientUrl}
           </a>
         </p>
