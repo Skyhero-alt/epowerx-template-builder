@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { InlineWidget } from "react-calendly";
 
 function ClientPage() {
   const { clientId } = useParams();
@@ -50,6 +50,12 @@ function ClientPage() {
         <p className="text text-lg mt-20 text-left m-10">
           {clientData.explanationText}
         </p>
+      </div>
+      <div>
+        <InlineWidget
+          className="bg-base-200"
+          url="https://calendly.com/mdnouman/30min?hide_gdpr_banner=1&primary_color=fbbd23"
+        />
       </div>
     </div>
   );
