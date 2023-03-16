@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function FormPage() {
+  const [reqObj, setReqObj] = useState({
+    videoGallery1: "",
+    videoGallery2: "",
+    videoGallery3: "",
+  });
+
   const [clientData, setClientData] = useState({
     companyName: "",
     pocName: "",
@@ -14,8 +20,6 @@ function FormPage() {
     videoGallery: [],
   });
 
-  useEffect(() => {}, []);
-
   const [clientUrl, setClientUrl] = useState("");
 
   const handleInputChange = (event) => {
@@ -25,6 +29,7 @@ function FormPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const response = await axios.post(
         "http://localhost:3000/clients",
@@ -53,7 +58,7 @@ function FormPage() {
         </Link>
       </div>
       <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
-        <h1 className="text-5xl font-bold mt-20">Build client page</h1>
+        <h1 className="text-5xl font-bold my-10">Build client page</h1>
         <label className="label">
           <label className="label-text">Name:</label>
         </label>
@@ -134,13 +139,72 @@ function FormPage() {
           <label className="label-text">Video Gallery:</label>
         </label>
         <input
-          className="input input-bordered input-secondary w-full max-w-md"
+          className="input input-bordered mb-3 input-secondary w-full max-w-md"
           type="text"
-          placeholder="Enter url"
-          name="videoGallery"
-          value={clientData.videoGallery}
-          onChange={handleInputChange}
+          placeholder="Enter video url"
+          name="videoGallery1"
+          value={reqObj.videoGallery1}
+          onChange={(e) => {
+            setReqObj((prevReqObj) => ({
+              ...prevReqObj,
+              videoGallery1: e.target.value,
+            }));
+            setClientData((prevClientData) => ({
+              ...prevClientData,
+              videoGallery: [
+                e.target.value,
+                reqObj.videoGallery2,
+                reqObj.videoGallery3,
+              ],
+            }));
+          }}
         />
+
+        <input
+          className="input input-bordered mb-3 input-secondary w-full max-w-md"
+          type="text"
+          placeholder="Enter video url"
+          name="videoGallery2"
+          value={reqObj.videoGallery2}
+          onChange={(e) => {
+            setReqObj((prevReqObj) => ({
+              ...prevReqObj,
+              videoGallery2: e.target.value,
+            }));
+            setClientData((prevClientData) => ({
+              ...prevClientData,
+              videoGallery: [
+                reqObj.videoGallery1,
+                e.target.value,
+                reqObj.videoGallery3,
+              ],
+            }));
+          }}
+        />
+
+        <input
+          className="input input-bordered mb-3 input-secondary w-full max-w-md"
+          type="text"
+          placeholder="Enter vertical video url"
+          name="videoGallery3"
+          value={reqObj.videoGallery3}
+          onChange={(e) => {
+            setReqObj((prevReqObj) => ({
+              ...prevReqObj,
+              videoGallery3: e.target.value,
+            }));
+            setClientData((prevClientData) => ({
+              ...prevClientData,
+              videoGallery: [
+                reqObj.videoGallery1,
+
+                reqObj.videoGallery2,
+                e.target.value,
+              ],
+            }));
+          }}
+        />
+
         <button type="submit" className="btn btn-wide btn-accent mt-10">
           Submit
         </button>
@@ -149,7 +213,7 @@ function FormPage() {
       {clientUrl && (
         <p className="mt-10 bg-blue-600 p-5 w-fit mx-auto rounded-2xl text-white">
           Custom URL for this client:{" "}
-          <a href={clientUrl} target="_blank" rel="noopene`r noreferrer">
+          <a href={clientUrl} target="_blank" rel="noopener noreferrer">
             {clientUrl}
           </a>
         </p>
