@@ -10,11 +10,13 @@ function App() {
   const [component, setComponent] = useState(<NotAllowed />);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/my-protected-page").then((res) => {
-      // console.log(res);
-      if (res.data.comp == "<NotAllowed />") setComponent(<NotAllowed />);
-      else if (res.data.comp == "<FormPage />") setComponent(<FormPage />);
-    });
+    axios
+      .get("https://expowerx-template-backend.onrender.com/my-protected-page")
+      .then((res) => {
+        console.log(res);
+        if (res.data.comp == "<NotAllowed />") setComponent(<NotAllowed />);
+        else if (res.data.comp == "<FormPage />") setComponent(<FormPage />);
+      });
   }, []);
 
   return (
