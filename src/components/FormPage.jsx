@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ function FormPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/clients",
+        "https://expowerx-template-backend.onrender.com/clients",
         JSON.stringify(clientData),
         {
           headers: {
@@ -197,7 +197,6 @@ function FormPage() {
               ...prevClientData,
               videoGallery: [
                 reqObj.videoGallery1,
-
                 reqObj.videoGallery2,
                 e.target.value,
               ],

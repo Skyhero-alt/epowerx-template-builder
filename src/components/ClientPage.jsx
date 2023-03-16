@@ -8,7 +8,9 @@ function ClientPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`http://localhost:3000/clients/${clientId}`);
+      const response = await fetch(
+        `https://expowerx-template-backend.onrender.com/clients/${clientId}`
+      );
       const data = await response.json();
       setClientData(data);
       console.log(data);
